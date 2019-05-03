@@ -4,14 +4,14 @@
 // PART 1: SHOW A FORTUNE
 
 function showFortune(evt) {
+  $.get('/fortune', (response)=>{
+    // $('#fortune-text').insert(response);
 
-    // TODO: get the fortune and show it in the #fortune-text div
+    $('#fortune-text').html(response);
+  });
 }
 
 $('#get-fortune-button').on('click', showFortune);
-
-
-
 
 
 // PART 2: SHOW WEATHER
@@ -20,8 +20,16 @@ function showWeather(evt) {
     evt.preventDefault();
 
     let url = "/weather.json";
-    let formData = {"zipcode": $("#zipcode-field").val()};
+    let formData = {"zipcode": $("#zipcode-field").val()
 
+  };
+    
+    
+
+    $.get(url, formData, (response) => {
+      console.log("AAAA",response.forecast);
+      $('#weather-info').html(response.forecast);
+    });
 
     // TODO: request weather with that URL and show the forecast in #weather-info
 }
